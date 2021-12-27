@@ -3,7 +3,7 @@ const router = express.Router();
 const Employee = require('../model/empSchema');
 
 
-router.get('/', async (req,res) => {
+router.get('/getEmployees', async (req,res) => {
     try{
         const employees = await Employee.find()
         res.json(employees);
@@ -14,7 +14,7 @@ router.get('/', async (req,res) => {
     }
 });
 
-router.post('/', async(req,res) => {
+router.post('/addEmployee', async(req,res) => {
     const employee = new Employee({
         name: req.body.name,
         email: req.body.email,
