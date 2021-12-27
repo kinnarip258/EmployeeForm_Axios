@@ -6,7 +6,7 @@ const Employee = require('../model/empSchema');
 router.get('/getEmployees', async (req,res) => {
     try{
         const employees = await Employee.find()
-        res.json(employees);
+        res.send((employees));
     }
     catch(err) {
         console.log("error: ", err)
@@ -24,8 +24,8 @@ router.post('/addEmployee', async(req,res) => {
         password: req.body.password
     })
     try{
-        const e1 = await employee.save()
-        res.json(e1)
+        const e1 = await employee.save();
+        res.send((e1))
     }
     catch(err){
         console.log("error: ", err)
@@ -33,21 +33,33 @@ router.post('/addEmployee', async(req,res) => {
     };
 });
 
-router.get('/:id',async (req,res) => {
+router.get('/getEmployee/:id',async (req,res) => {
     
     try{
         const employee = await Employee.findById(req.params.id)
-        console.log("get request for a emp")
-        res.json(employee)
+        console.log("get request for a emp", employee);
+        res.send(employee)
     }
     catch(err) {
         console.log("error: ", err)
-        res.send(res.send("error" + err))
+        res.send("error" + err)
     };
 });
 
-router.put('/:id', async (req,res) => {
-    
+router.get('/searchEmployee/:searchName',async (req,res) => {
+    try{
+        // const employee = await Employee.find(req.params.searchName)
+        // console.log("get request for a emp", Employee.find((ele) => ele.name));
+        // res.send(employee)
+    }
+    catch(err) {
+        console.log("error: ", err)
+        res.send("error" + err)
+    };
+});
+
+router.put('/updateEmployee/:id', async (req,res) => {
+   
     try{
         const employee = await Employee.findById(req.params.id);
         employee.name = req.body.name;
@@ -57,7 +69,7 @@ router.put('/:id', async (req,res) => {
         employee.salary= req.body.salary;
         employee.password= req.body.password;
         const e1 = await employee.save();
-        res.json(e1);
+        res.send((e1));
     }
     catch(err) {
         console.log("error: ", err)
@@ -70,7 +82,7 @@ router.delete('/:id',async (req,res) => {
     try{
         const employee = await Employee.findById(req.params.id);
         const e1 = employee.remove();
-        res.json(e1)
+        res.send(e1)
     }
     catch(err) {
         console.log("error: ", err)

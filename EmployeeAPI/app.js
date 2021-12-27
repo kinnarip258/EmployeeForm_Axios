@@ -9,6 +9,15 @@ mongoose.connect(url, () => {
     console.log("db connected..")
 });
 
+app.use((req,res,next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+    "GET, POST,PUT, DELETE, OPTIONS")
+    next();
+})
+
+
 app.use(express.json());
 
 const empRoutes = require('./routes/empRoutes')
