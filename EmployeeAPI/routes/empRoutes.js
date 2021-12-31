@@ -46,18 +46,6 @@ router.get('/getEmployee/:id',async (req,res) => {
     };
 });
 
-router.get('/searchEmployee/:searchName',async (req,res) => {
-    try{
-        // const employee = await Employee.find(req.params.searchName)
-        // console.log("get request for a emp", Employee.find((ele) => ele.name));
-        // res.send(employee)
-    }
-    catch(err) {
-        console.log("error: ", err)
-        res.send("error" + err)
-    };
-});
-
 router.put('/updateEmployee/:id', async (req,res) => {
    
     try{
